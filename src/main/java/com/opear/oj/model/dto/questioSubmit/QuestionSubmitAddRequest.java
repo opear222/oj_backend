@@ -1,23 +1,22 @@
-package com.opear.oj.model.entity;
+package com.opear.oj.model.dto.questioSubmit;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
- * 题目提交表
- * @TableName question_submit
+ * 帖子点赞请求
+ *
+ * @author <a href="https://github.com/liopear">程序员鱼皮</a>
+ * @from <a href="https://opear.icu">编程导航知识星球</a>
  */
-@TableName(value ="question_submit")
 @Data
-public class QuestionSubmit implements Serializable {
-    /**
-     * id
-     */
-    @TableId(type = IdType.AUTO)
-    private Long id;
+public class QuestionSubmitAddRequest implements Serializable {
+
 
     /**
      * 编程语言
@@ -62,7 +61,6 @@ public class QuestionSubmit implements Serializable {
     /**
      * 是否删除
      */
-    @TableLogic
     private Integer isDelete;
 
     @TableField(exist = false)

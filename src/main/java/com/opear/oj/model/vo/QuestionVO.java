@@ -1,22 +1,17 @@
-package com.opear.oj.model.entity;
+package com.opear.oj.model.vo;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.opear.oj.model.dto.question.JudgeConfig;
 
-import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
+import java.util.List;
 
-/**
- * 题目
- * @TableName question
- */
-@TableName(value ="question")
-@Data
-public class Question implements Serializable {
+public class QuestionVO {
     /**
      * id
      */
-    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -32,12 +27,8 @@ public class Question implements Serializable {
     /**
      * 标签列表（json 数组）
      */
-    private String tags;
+    private List<String> tags;
 
-    /**
-     * 答案
-     */
-    private String answer;
 
     /**
      * 提交数
@@ -52,12 +43,9 @@ public class Question implements Serializable {
     /**
      * 判题配置（json 数组）
      */
-    private String judgeConfig;
+    private List<JudgeConfig> judgeConfig;
 
-    /**
-     * 判题用例（json 数组）
-     */
-    private String judgeCase;
+
 
     /**
      * 点赞数
@@ -87,7 +75,6 @@ public class Question implements Serializable {
     /**
      * 是否删除
      */
-    @TableLogic
     private Integer isDelete;
 
     @TableField(exist = false)
