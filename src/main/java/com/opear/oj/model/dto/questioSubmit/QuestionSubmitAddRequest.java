@@ -29,39 +29,10 @@ public class QuestionSubmitAddRequest implements Serializable {
     private String code;
 
     /**
-     * 判题信息（json 数组）
-     */
-    private String judgeInfo;
-
-    /**
-     * 提交状态 0-带判题 1-判题中 2-成功 3-失败
-     */
-    private Integer status;
-
-    /**
-     * 提交用户 id
-     */
-    private Long userId;
-
-    /**
      * 问题 id
      */
     private Long questionId;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    /**
-     * 是否删除
-     */
-    private Integer isDelete;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

@@ -5,6 +5,7 @@ import com.opear.oj.common.ErrorCode;
 import com.opear.oj.common.ResultUtils;
 import com.opear.oj.exception.BusinessException;
 import com.opear.oj.model.dto.postthumb.QuestionSubmitAddRequest;
+import com.opear.oj.model.dto.questioSubmit.QuestionSubmitAddRequest;
 import com.opear.oj.model.entity.User;
 import com.opear.oj.service.QuestionSubmitService;
 import com.opear.oj.service.UserService;
@@ -42,15 +43,15 @@ public class QuestionSubmitController {
      * @return resultNum 本次点赞变化数
      */
     @PostMapping("/")
-    public BaseResponse<Integer> doThumb(@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest,
+    public BaseResponse<Integer> doQuestionSubmit(@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest,
             HttpServletRequest request) {
-        if (questionSubmitAddRequest == null || questionSubmitAddRequest.getPostId() <= 0) {
+        if (questionSubmitAddRequest == null || questionSubmitAddRequest.getQuestionId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         // 登录才能点赞
         final User loginUser = userService.getLoginUser(request);
-        long postId = questionSubmitAddRequest.getPostId();
-        int result = questionSubmitService.doQuestionSubmit(postId, loginUser);
+        long questionId = questionSubmitAddRequest.getQuestionId();
+        int result = questionSubmitService.doQuestionSubmit(questionId, loginUser);
         return ResultUtils.success(result);
     }
 
