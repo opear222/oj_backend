@@ -4,7 +4,6 @@ import com.opear.oj.common.BaseResponse;
 import com.opear.oj.common.ErrorCode;
 import com.opear.oj.common.ResultUtils;
 import com.opear.oj.exception.BusinessException;
-import com.opear.oj.model.dto.postthumb.QuestionSubmitAddRequest;
 import com.opear.oj.model.dto.questioSubmit.QuestionSubmitAddRequest;
 import com.opear.oj.model.entity.User;
 import com.opear.oj.service.QuestionSubmitService;
@@ -25,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @from <a href="https://opear.icu">编程导航知识星球</a>
  */
 @RestController
-@RequestMapping("/post_thumb")
+@RequestMapping("/questionSubmit")
 @Slf4j
 public class QuestionSubmitController {
 
@@ -36,7 +35,7 @@ public class QuestionSubmitController {
     private UserService userService;
 
     /**
-     * 点赞 / 取消点赞
+     * 提交题目
      *
      * @param questionSubmitAddRequest
      * @param request
@@ -48,11 +47,11 @@ public class QuestionSubmitController {
         if (questionSubmitAddRequest == null || questionSubmitAddRequest.getQuestionId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // 登录才能点赞
+        // 登录才能提交
         final User loginUser = userService.getLoginUser(request);
-        long questionId = questionSubmitAddRequest.getQuestionId();
-        int result = questionSubmitService.doQuestionSubmit(questionId, loginUser);
-        return ResultUtils.success(result);
+//        long questionId = questionSubmitAddRequest.getQuestionId();
+        long result = questionSubmitService.doQuestionSubmit(questionSubmitAddRequest, loginUser);
+        return ResultUtils.success((int) result);
     }
 
 }

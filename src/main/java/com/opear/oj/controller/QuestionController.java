@@ -10,10 +10,7 @@ import com.opear.oj.common.ResultUtils;
 import com.opear.oj.constant.UserConstant;
 import com.opear.oj.exception.BusinessException;
 import com.opear.oj.exception.ThrowUtils;
-import com.opear.oj.model.dto.question.QuestionAddRequest;
-import com.opear.oj.model.dto.question.QuestionEditRequest;
-import com.opear.oj.model.dto.question.QuestionQueryRequest;
-import com.opear.oj.model.dto.question.QuestionUpdateRequest;
+import com.opear.oj.model.dto.question.*;
 import com.opear.oj.model.entity.Question;
 import com.opear.oj.model.entity.User;
 import com.opear.oj.model.vo.QuestionVO;
@@ -63,6 +60,14 @@ public class QuestionController {
         List<String> tags = questionAddRequest.getTags();
         if (tags != null) {
             question.setTags(JSONUtil.toJsonStr(tags));
+        }
+        List<JudgeCase> judgeCase = questionAddRequest.getJudgeCase();
+        if (judgeCase != null) {
+            question.setJudgeCase(JSONUtil.toJsonStr(judgeCase));
+        }
+        JudgeConfig judgeConfig = questionAddRequest.getJudgeConfig();
+        if (judgeConfig != null) {
+            question.setJudgeConfig(JSONUtil.toJsonStr(judgeConfig));
         }
         questionService.validQuestion(question, true);
         User loginUser = userService.getLoginUser(request);
@@ -117,6 +122,14 @@ public class QuestionController {
         List<String> tags = questionUpdateRequest.getTags();
         if (tags != null) {
             question.setTags(JSONUtil.toJsonStr(tags));
+        }
+        List<JudgeCase> judgeCase = questionUpdateRequest.getJudgeCase();
+        if (judgeCase != null) {
+            question.setJudgeCase(JSONUtil.toJsonStr(judgeCase));
+        }
+        JudgeConfig judgeConfig = questionUpdateRequest.getJudgeConfig();
+        if (judgeConfig != null) {
+            question.setJudgeConfig(JSONUtil.toJsonStr(judgeConfig));
         }
         // 参数校验
         questionService.validQuestion(question, false);

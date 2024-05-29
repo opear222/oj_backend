@@ -1,21 +1,26 @@
 package com.opear.oj.service;
 
-import com.opear.oj.model.entity.QuestionSubmit;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.opear.oj.model.dto.questioSubmit.QuestionSubmitAddRequest;
+import com.opear.oj.model.entity.QuestionSubmit;
 import com.opear.oj.model.entity.User;
 
 /**
-* @author 14998
-* @description 针对表【question_submit(题目提交表)】的数据库操作Service
-* @createDate 2024-05-28 16:49:58
-*/
+ * 帖子点赞服务
+ *
+ * @author <a href="https://github.com/liopear">程序员鱼皮</a>
+ * @from <a href="https://opear.icu">编程导航知识星球</a>
+ */
 public interface QuestionSubmitService extends IService<QuestionSubmit> {
+
     /**
-     * 提交题目
+     * 点赞
      *
-     * @param questionId
+     * @param questionSubmitAddRequest
      * @param loginUser
-     * @return
+     * @return 提交id
      */
-    int doQuestionSubmit(long questionId, User loginUser);
+    long doQuestionSubmit(QuestionSubmitAddRequest questionSubmitAddRequest, User loginUser);
+
+
 }
