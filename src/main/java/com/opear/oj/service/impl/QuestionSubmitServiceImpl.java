@@ -1,9 +1,11 @@
 package com.opear.oj.service.impl;
 
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.opear.oj.common.ErrorCode;
 import com.opear.oj.exception.BusinessException;
 import com.opear.oj.mapper.QuestionSubmitMapper;
+import com.opear.oj.model.dto.questioSubmit.JudgeInfo;
 import com.opear.oj.model.dto.questioSubmit.QuestionSubmitAddRequest;
 import com.opear.oj.model.entity.Question;
 import com.opear.oj.model.entity.QuestionSubmit;
@@ -29,7 +31,7 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 
 
     /**
-     * 点赞
+     * 提交问题
      *
      * @param questionSubmitAddRequest
      * @param loginUser
@@ -55,7 +57,8 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         QuestionSubmit questionSubmit = new QuestionSubmit();
         questionSubmit.setLanguage(language);
         questionSubmit.setCode(code);
-        questionSubmit.setJudgeInfo("{}");
+        JudgeInfo judgeInfo = new JudgeInfo();
+        questionSubmit.setJudgeInfo(JSONUtil.toJsonStr(judgeInfo));
         questionSubmit.setStatus(QuestionSubmitStatusEnum.WAITING.getValue());
         questionSubmit.setUserId(userId);
         questionSubmit.setQuestionId(questionId);
