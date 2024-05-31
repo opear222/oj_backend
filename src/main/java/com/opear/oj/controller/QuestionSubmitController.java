@@ -1,11 +1,15 @@
 package com.opear.oj.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.opear.oj.common.BaseResponse;
 import com.opear.oj.common.ErrorCode;
 import com.opear.oj.common.ResultUtils;
 import com.opear.oj.exception.BusinessException;
 import com.opear.oj.model.dto.questioSubmit.QuestionSubmitAddRequest;
+import com.opear.oj.model.dto.questioSubmit.QuestionSubmitQueryRequest;
+import com.opear.oj.model.entity.QuestionSubmit;
 import com.opear.oj.model.entity.User;
+import com.opear.oj.model.vo.QuestionSubmitVO;
 import com.opear.oj.service.QuestionSubmitService;
 import com.opear.oj.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -54,4 +58,14 @@ public class QuestionSubmitController {
         return ResultUtils.success((int) result);
     }
 
+
+    @PostMapping("/list")
+        public BaseResponse<Page<QuestionSubmitVO>> listQuestionSubmitByPage(@RequestBody QuestionSubmitQueryRequest questionSubmitQueryRequest, HttpServletRequest httpServletRequest) {
+            long current = questionSubmitQueryRequest.getCurrent();
+            long size = questionSubmitQueryRequest.getPageSize();
+            Page<QuestionSubmit> questionSubmitPage = questionSubmitService.page(new Page<>(current, size),
+                    questionSubmitService.getQueryWrapper(questionSubmitQueryRequest));
+            User loginUser = userService.getLoginUser(httpServletRequest);
+            return ResultUtils.success(questionSubmitService.getQuestionSubmitVOPage(questionSubmitPage,httpServletRequest,loginUser));
+    }
 }
